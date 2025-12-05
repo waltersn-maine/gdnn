@@ -1,0 +1,9 @@
+# .gitignore
+venv/gt_env
+.venv/gt_env
+venv/igm
+.venv/igm
+venv/gdn-env
+.venv/gdn-evn
+venv/base
+.venv/base
