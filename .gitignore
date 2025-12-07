@@ -7,3 +7,4 @@ venv/gdn-env
 .venv/gdn-evn
 venv/base
 .venv/base
+.ipynb*
