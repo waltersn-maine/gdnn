@@ -9,3 +9,5 @@ venv/base
 .venv/base
 .ipynb*
 *.slf
+*.pkl
+*.png
