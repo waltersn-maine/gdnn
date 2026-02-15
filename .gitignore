@@ -11,3 +11,4 @@ venv/base
 *.slf
 *.pkl
 *.png
+*.tif
