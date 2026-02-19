@@ -190,6 +190,8 @@ dependencies:
       - webencodings==0.5.1
       - websocket-client==1.9.0
       - widgetsnbextension==4.0.15
+      - xarray==2025.6.1
+      - xarray-selafin==0.2.0
       - xxhash==3.6.0
       - yarg==0.1.9
       - yarl==1.22.0
