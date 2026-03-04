@@ -165,6 +165,7 @@ dependencies:
       - rfc3986-validator==0.1.1
       - rfc3987-syntax==1.1.0
       - rpds-py==0.30.0
+      - scikit-learn==1.7.2
       - scipy==1.15.3
       - send2trash==2.1.0
       - shapely==2.1.2
@@ -176,6 +177,7 @@ dependencies:
       - tinycss2==1.4.0
       - tomli==2.4.0
       - torch==2.9.1
+      - torchviz==0.0.3
       - torch-geometric==2.7.0
       - tornado==6.5.4
       - tqdm==4.67.1
