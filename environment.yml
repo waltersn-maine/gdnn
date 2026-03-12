@@ -153,6 +153,7 @@ dependencies:
       - pyogrio==0.12.1
       - pyparsing==3.3.2
       - pyproj==3.7.1
+      - pysheds==0.5
       - python-dateutil==2.9.0.post0
       - python-json-logger==4.0.0
       - pytz==2025.2
