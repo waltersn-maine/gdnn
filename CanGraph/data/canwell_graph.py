@@ -26,7 +26,7 @@ import pickle
 import psutil
 
 # ── USER INPUT ────────────────────────────────────────────────────────────────
-DATA_DIR = "/Users/nestorw/Geodyne/geodyne/data-pfrost/raw/"  # fill in your path
+DATA_DIR = "/home/samuelnwalters/Geodyne/gdnn/CanGraph/data/"  # fill in your path
 # ─────────────────────────────────────────────────────────────────────────────
 
 DEM_PATH      = os.path.join(DATA_DIR, "Canwell_FullDomain_DEM3m.tif")
@@ -62,7 +62,7 @@ doubslp, _,         _   = load_raster(DOUBSLP_PATH)
 diff,    _,         _   = load_raster(DIFF_PATH)
 
 height, width = dem.shape
-cell_size = 3
+cell_size = 3 # Fill in cell size (m resolution) from raster
 print(f"Raster shape: {height} rows x {width} cols")
 print(f"Total pixels: {height * width:,}")
 print(f"Cell size (Verify this!): {cell_size}")
@@ -125,7 +125,7 @@ for i, (r, c) in enumerate(zip(rows, cols)):
         slope     = float(slope[r, c])    if not np.isnan(slope[r, c])   else None,
         aspect    = float(aspect[r, c])   if not np.isnan(aspect[r, c])  else None,
         doubslope = float(doubslp[r, c])  if not np.isnan(doubslp[r, c]) else None,
-        diff      = float(diff[r, c])     if not np.isnan(diff[r, c])    else None,
+        diff      = float(diff[r, c]) if (r < diff.shape[0] and c < diff.shape[1] and not np.isnan(diff[r, c])) else None,
         is_slope  = bool(in_slope[i]),
         is_basin  = bool(in_basin[i]),
     )
@@ -155,7 +155,7 @@ for i, (r, c) in enumerate(zip(rows, cols)):
             neighbor_id = node_id_map[(int(nr), int(nc))]
             # only add edge once (undirected)
             if neighbor_id > current_id:
-                dist = cell_size * sqrt(dr**2 + dc**2) 
+                dist = cell_size * np.sqrt(dr**2 + dc**2) 
                 neigh_slope = abs(current_elev - dem[nr, nc])/dist
                 G.add_edge(current_id, neighbor_id, weight=float(neigh_slope))
                 edge_count += 1
