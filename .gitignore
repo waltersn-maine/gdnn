@@ -13,3 +13,4 @@ venv/base
 *.png
 *.tif
 *.pt
+*.xml
