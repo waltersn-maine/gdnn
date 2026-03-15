@@ -1,0 +1,58 @@
+name: gd_env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    # ── PyG wheel index: update this URL if torch version changes ──
+    - --find-links https://data.pyg.org/whl/torch-2.9.0+cu128.html
+
+    # ── Core scientific stack ──
+    - numpy
+    - pandas
+    - scipy
+    - scikit-learn
+    - matplotlib
+    - sympy
+
+    # ── Geospatial ──
+    - rasterio
+    - geopandas
+    - pyproj
+    - shapely
+    - pyogrio
+    - pysheds
+    - affine
+
+    # ── Graph ──
+    - networkx
+
+    # ── PyTorch + CUDA (pure pip, no conda torch) ──
+    - torch==2.9.1
+    - torchviz
+
+    # ── PyG and dependencies (must match torch version above) ──
+    - torch-scatter
+    - torch-sparse
+    - torch-cluster
+    - torch-spline-conv
+    - torch-geometric
+
+    # ── Jupyter ──
+    - jupyter
+    - jupyterlab
+    - ipykernel
+    - ipywidgets
+    - notebook
+
+    # ── Utilities ──
+    - psutil
+    - tqdm
+    - requests
+    - pyyaml
+    - pillow
+    - xarray
+    - xarray-selafin
+    - pipreqs
