@@ -12,3 +12,4 @@ venv/base
 *.pkl
 *.png
 *.tif
+*.pt
