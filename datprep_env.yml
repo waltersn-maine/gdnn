@@ -1,0 +1,45 @@
+name: mac_env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    # ── Core scientific stack ──
+    - numpy
+    - pandas
+    - scipy
+    - scikit-learn
+    - matplotlib
+    - sympy
+
+    # ── Geospatial ──
+    - rasterio
+    - geopandas
+    - pyproj
+    - shapely
+    - pyogrio
+    - pysheds
+    - affine
+    - gdal
+
+    # ── Graph (for building, not training) ──
+    - networkx
+    - scipy  
+
+    # ── Jupyter ──
+    - jupyter
+    - jupyterlab
+    - ipykernel
+    - ipywidgets
+    - notebook
+
+    # ── Utilities ──
+    - psutil
+    - tqdm
+    - requests
+    - pyyaml
+    - pillow
+    - xarray
+    - pipreqs
