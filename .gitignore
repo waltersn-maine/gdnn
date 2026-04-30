@@ -16,3 +16,4 @@ venv/base
 *.xml
 *.npy
 *.npz
+*.csv
