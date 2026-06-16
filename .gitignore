@@ -18,3 +18,4 @@ venv/base
 *.npz
 *.csv
 *.geojson
+*.json
