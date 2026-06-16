@@ -1,0 +1,124 @@
+; with Phaedra's erate as variable 1 6/4/2018 in the erosion 12 script
+; 8 7 17 reverse all dipping planes to 45 
+; 6/9/17 bringing new glacier tapered snout of 5 22 17 into this dir 
+; edited for phaedra west slope changes;
+;17 sept 15  running again the maice with weak cross section but no ssoft   with erosion 9
+;rest FERM-Elastic_glacier_5m
+
+new
+set directory input
+
+
+;;;;;;;;;; next for glacier in valley
+
+rest FERM-Elastic_glacier1_50maA_1;;;weak;_7_13_17;FERM-Elastic_glacier1_50maA;;FERM-Elastic_glacier1_50ma_5_22_17; rest FERM-Elastic_glacier1_50maA
+
+model mohr range group Layer5 not
+prop dens 2700 bulk 1e14 shear 2e13 range group Layer5 not
+prop bul 1e10 shea 3e9 fric 30 coh 1e6 tens 1e5 range group Layer5 not
+
+;make edges elastic so they don't fail
+
+model el range x -10 60
+model el range x 4940 5010
+model el range y -10 60
+model el range y 4940 5010
+prop bul 1e10 shea 3e9 range x -10 60
+prop bul 1e10 shea 3e9 range x 4940 5010
+prop bul 1e10 shea 3e9 range y -10 60
+prop bul 1e10 shea 3e9 range y 4940 5010
+
+ste 200
+
+save FERM_MC_glacier_50maA_1;;;weak; 9_30_15A_7_13_17
+
+;;;;;;;  use this for no glacier in valley save FERM_MC_glacier_50ma9_10_15;save FERM_MC_glacier1
+
+;=========================================================
+;cross structure   
+;;;;;;;;;prop fric 5 coh 5e5 tens 1e4 range y=1990 2110
+;or on sept 29 2015
+
+;prop coh 1e6 uni 5e5 fric 30 uni 15 tens 1e5 uni 5e4
+
+;and increase the spread on Feb 17 2016
+prop coh 1e6 uni 5e5 fric 30 uni 15 tens 1e5 uni 5e4
+
+;07 10 18 near horizontal = prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 1 distance 26 origin 0 2500 950
+prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 1 distance 26 origin 0 2500 900
+prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 1 distance 26 origin 0 2500 600
+prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 1 distance 26 origin 0 2500 300
+prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 1 distance 26 origin 0 2500 0
+prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 1 distance 26 origin 0 2500 -100
+
+;prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 45 distance 20 origin 0 4000 0 ; 6/23/17 distance = 26 if vertical   had been 10 and -45 in most runs thickened from 20
+;prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 45 distance 20 origin 0 3500 0 ; 6/23/17  had been 10 and -45 in most runs
+;prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 45 distance 20 origin 0 3000 0 
+;prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 45 distance 20 origin 0 2500 0 
+;prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 45 distance 20 origin 0 2000 0 
+;prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 45 distance 20 origin 0 1500 0 
+;prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 45 distance 20 origin 0 1000 0 
+
+;prop fric 5 coh 1e5 tens 1e4 range plane dd -30 dip 45 distance 20 origin 0 4000 0 ; 6/23/17 distance = 26 if vertical   had been 10 and -45 in most runs thickened from 20
+;prop fric 5 coh 1e5 tens 1e4 range plane dd -30 dip 45 distance 20 origin 0 3500 0 ; 6/23/17  had been 10 and -45 in most runs
+;prop fric 5 coh 1e5 tens 1e4 range plane dd -30 dip 45 distance 20 origin 0 3000 0 
+;prop fric 5 coh 1e5 tens 1e4 range plane dd -30 dip 45 distance 20 origin 0 2500 0 
+;prop fric 5 coh 1e5 tens 1e4 range plane dd -30 dip 45 distance 20 origin 0 2000 0 
+;prop fric 5 coh 1e5 tens 1e4 range plane dd -30 dip 45 distance 20 origin 0 1500 0 
+;prop fric 5 coh 1e5 tens 1e4 range plane dd -30 dip 45 distance 20 origin 0 1000 0 
+
+;near horizontal = prop fric 5 coh 1e5 tens 1e4 range plane dd 30 dip 1 distance 26 origin 0 2500 950
+; to provide random property distr   
+
+;;;;;prop coh 1e6 uni 5e5 fric 30 uni 15 tens 1e5 uni 5e4
+
+;valley parallel structure 
+;;;;;;;;;;;;prop fric 5 coh 5e5 tens 1e4 range x=2410 2610
+st 100
+
+;call FERM_ErosionFish-71.f3dat ; had been FERM_ErosionFish-5
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;call FERM_ErosionFish-8-ice.f3dat
+;call FERM_ErosionFish-9-ice.txt
+call FERM_ErosionFish-12-ice_strong.txt; try 12 6/4/2018
+;;;;;;;;;;; 6-28-17 try 10 rather than 11 call FERM_ErosionFish-11-ice.txt
+
+
+;ste 50
+
+;cross structure   prop fric 5 coh 5e5 tens 1e4 range y=1900 2100
+
+;;;; and for elasticity change in fault zone: prop bu=1e8 sh=.3e8 range y=1300 1500
+;valley parallel structure prop fric 5 coh 5e5 tens 1e4 range x=2410 2590
+; with wider zone prop fric 10 coh 1e6 tens 1e5 range x=2210 2790
+
+
+; to shorten glacier       delete zones range y 0 3000 group Layer5
+; to impart a velocity to glacier ini yv -.1 range group layer5 y=1590 5010 ; for new glacial model old = 2700  
+; to impart a velocity to MODEL ini yv -.1 xv=.1 range y= 61 5010; ini yv -.001 xv=.001 range y= 61 5010;               group layer5 y=2500 5010 ;
+
+; to harden basal ice try prop coh 1e6 range group layer5 and prop fric 50 range group layer5
+
+:soften ice: prop coh 1e5 fric 5 range group layer5
+
+
+; to provide random property distr   prop coh 1e6 uni 5e5 fric 30 uni 15 tens 1e5 uni 5e4
+;ste 20
+
+;dipping planes?
+;july 25 adding dipping planes to knick_ini   copy and paste
+;standardise fric
+; note x goes from 800-1200 on this file; y from 0 100, z -100 to more
+;prop fric 10 coh 5e5 range plane dd 0 dip 45 distance 10 origin 1000 50 0
+; or (july 30th)
+;prop fric 5 coh 5e5 range plane dd 85 dip -30 distance 5 origin 1020 50 0
+;;;;;;prop fric 5 coh 5e5 tens 1e4 range plane dd 85 dip -45 distance 5 origin 0 3000 0 ;1020 50 0
+
+;;;and to increase local pore pressure: ini pp mult 2.5 range y=1000 1500;ini pp add 5e6 range y=2000 3000;x= 2000 2500 y=500 1000  ; or for mid south ridge x= 3600 4800 y=3200 3700 ; or north ridge ini pp add 5e6 range x= 200 1800 y=3200 3700  
+;NB if tens and coh are to high PP effect is minimal try prop fric 5 coh 5e5 tens 1e4 range y 1000 1500
+
+;;;try following on 6 30 17 ini pp add 1e6 range group layer5
+
+;;; to tilt ini z add 1 grad 0 .02  0
+ini z add 1 grad 0 .02  0
+;save FERM_MC_glacier_5m_ini
+save dipplane_horiz_posdip_fee30_ini_7_13_17_A_1strong_erate
