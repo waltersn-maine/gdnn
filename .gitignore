@@ -19,3 +19,9 @@ venv/base
 *.csv
 *.geojson
 *.json
+*.cpg
+*.dbf
+*.prj
+*.qix
+*.shp
+*.shx
