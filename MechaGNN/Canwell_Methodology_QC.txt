@@ -1,0 +1,51 @@
+CANWELL ELEVATION COMPARISON: PROCESSING RECORD AND QC
+Project: C:\Users\tamer\Documents\ArcGIS\Projects\Canwell_DEM_Comparison\Canwell_DEM_Comparison.aprx
+
+SCOPE AND DATA PROVENANCE
+- 2000 Isabel Pass: Intermap legacy IfSAR DSM; actual acquisition date and vertical datum for the specific Canwell tiles remain unconfirmed.
+  Neighboring Isabel tile metadata identifies EGM96, but this is not verified for our three source tiles.
+- 2010 Intermap IfSAR: DTM, acquisition June 10-July 1, 2010; vertical NAVD88/GEOID09 (original tile metadata).
+- 2025 LiDAR: original source states WGS84 horizontal and vertical
+- DoDs cover common valid pixels across all three datasets, INCLUDING non-glacier terrain.
+  Consequently, spatial means below are NOT glacier-only elevation change or ice-volume estimates.
+
+2000 DSM-TO-DTM PROCESSING (PROVISIONAL)
+- QGIS slope-based DTM filter, raster input 5 m; initial test kernel=3, terrain slope=100, relaxed filter, SD=0.1 was too aggressive.
+- Retained candidate: kernel radius=3, terrain slope PARAMETER=500, Relax filter, standard deviation=0.1.
+- GDAL Fill NoData: maximum search distance=3 pixels (15 m), smoothing iterations=0.
+- Output masked back to the original 2000 DSM footprint using QGIS Raster Calculator.
+- Some rejected pixels/gaps remain. Steep natural slopes can be mistaken for non-ground; derived DTM is not an independently validated bare-earth model.
+- Preliminary DSM-minus-derived-DTM check found local extremes near -24.45 m and +57.01 m; mean near +0.24 m.
+
+HORIZONTAL GRID PROCESSING
+- Original 2000 WGS84 UTM Zone 6N (EPSG:32606) 5 m mosaic used as common reference grid.
+- ArcGIS Pro Project Raster: 2010 from NAD83 Alaska Albers (EPSG:3338) to WGS84 UTM Zone 6N (EPSG:32606).
+  Bilinear resampling, 5 m cells, snap raster 2000 original DSM mosaic.
+  IMPORTANT: Geographic transformation: WGS_1984_(ITRF00)_To_NAD_1983, applied in reverse (NAD83 to WGS84). No vertical datum transformation was performed.
+- ArcGIS Pro Resample: original cleaned 2025 1 m LiDAR to 5 m with Bilinear, same snap raster.
+- ArcGIS Pro Extract by Mask: 2010 and 2025 clipped using original 2000 DSM survey footprint.
+- No formal vertical datum transformation was applied during horizontal processing.
+
+VERTICAL BIAS ADJUSTMENT (PROVISIONAL)
+- Four visually road/roadside GCP locations used to estimate the systematic 2025-minus-2010 difference.
+- A uniform 15.1903 m was SUBTRACTED from the 2025 DEM over the overlapping survey area.
+- This is an empirical calibration from the same four points used in the check, NOT an independent vertical validation.
+- Verify long-term stability of road/roadside surfaces and the height datum before scientific interpretation.
+
+GCP RESULTS (metres; sampled with bilinear interpolation)
+Before correction: mean(2025-2010)=15.1903 m, sample SD=0.6995 m
+Point | 2000 DTM | 2010 DTM | corrected 2025 DEM | corrected 2025-2010
+1 (Road Middle) | 949.2015 | 947.9312 | 948.3575 | 0.4264
+2 (Road East) | 1137.7402 | 1138.2577 | 1138.9486 | 0.6909
+3 (Highway South) | 757.9622 | 757.7343 | 756.8720 | -0.8623
+4 (Highway North) | 771.4539 | 771.5641 | 771.3090 | -0.2551
+After correction: mean(2025-2010)=-0.0000 m, sample SD=0.6995 m; max absolute residual=0.8623 m
+
+RASTER METADATA AND STATISTICS (over full common valid coverage, not just glacier)
+DoD 2010 minus 2000: min=-67.5774 m, max=74.7311 m, mean=-3.5534 m, SD=7.0954 m, EPSG=32606, cell=5.00 x 5.00 m
+DoD 2025 minus 2010: min=-107.6500 m, max=50.7355 m, mean=-7.1401 m, SD=12.2898 m, EPSG=32606, cell=5.00 x 5.00 m
+DoD 2025 minus 2000: min=-118.4852 m, max=65.1843 m, mean=-10.6936 m, SD=17.9529 m, EPSG=32606, cell=5.00 x 5.00 m
+Closure check: min=0.0000 m, max=0.0000 m, mean=0.0000 m, SD=0.0000 m, EPSG=32606, cell=5.00 x 5.00 m
+
+DoD DEFINITIONS / SIGN CONVENTION
+Negative = apparent lowering; positive = apparent surface rise.
