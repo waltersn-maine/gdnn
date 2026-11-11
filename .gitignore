@@ -25,3 +25,4 @@ venv/base
 *.qix
 *.shp
 *.shx
+*.parquet
