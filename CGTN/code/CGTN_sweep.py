@@ -1,8 +1,8 @@
 import os, csv, time, torch, torch.nn.functional as F, numpy as np
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.metrics import r2_score
-import data as D
-from models import HeteroSAGE, HeteroGT
+import CGTN_torchdata as D
+from CGTN_torchmodels import HeteroSAGE, HeteroGT
 
 SLOPE = "../data/constructs/sledG_torch_pitedge_pitpit_2010.npz"
 BASIN = "../data/constructs/basin_mushgraph2010.npz"
